@@ -1,0 +1,4 @@
+* pipe dreams
+** click to enable music
+ - show "There is no music, this is pure css!"
+ - add floating music note background

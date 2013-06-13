@@ -1,0 +1,9 @@
+<html>
+  <head>
+    <link rel="stylesheet/less" type="text/css" href="less/base.less" />
+    <script type="text/javascript" src="js/less.js"></script>
+  </head>
+  <body>
+    <div id="floor"></div>
+  </body>
+</html>

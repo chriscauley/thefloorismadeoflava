@@ -1,0 +1,75 @@
+@cellSize: 25px;
+@iterations: 30;
+
+.grid (@index) when (@index > 0) {
+  (~".w@{index}") {
+    width: @cellSize * @index;
+  }
+  (~".h@{index}") {
+    height: @cellSize * @index;
+  }
+  .grid(@index - 1);
+}
+.grid (0) {}
+
+.grid (@iterations);
+#floor {
+  background: red;
+  position: absolute;
+  height: 90%;
+  top: 10%;
+  width: 100%;
+  &:hover { background: blue; }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#start, :hover, :hover>div {
+  background: white;
+}
+
+:hover>div {
+  background: white;
+}
+
+div { background: green; }
+
+#start {
+  position: absolute;
+  top:10%;
+  left: 50%;
+}
+
+.top { bottom: 100%; margin-bottom: -@cellSize; }
+.bottom{ top: 100%; margin-top: -@cellSize; }
+.right { left: 100%; margin-right: -@cellSize; }
+.left { right: 100%; margin-left: -@cellSize; }
+
+div {
+  background: green;
+  position: absolute;
+  outline: 1px solid;
+}
+
+[type="checkbox"] {
+  display:none;
+  &:checked + #level2 { display: block; }
+}
+
+#level2 {
+  display: none;
+  top: 10%;
+  left: 30px;
+}
+
+.lava:hover:before {
+  background: pink;
+  content:"";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
