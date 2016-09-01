@@ -1,0 +1,24 @@
+[lava] {
+  background: red;
+  display: flex;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  &:hover:before {
+    align-items: center;
+    background: pink;
+    bottom: 0;
+    content: attr(lava);
+    display: flex;
+    font-size: 100px;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 999;
+  }
+}

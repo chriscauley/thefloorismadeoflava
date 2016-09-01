@@ -1,0 +1,35 @@
+.grid (@index) when (@index > 0) {
+  .left@{index}, .right@{index} {
+    width: @cellSize * @index;
+  }
+  .down@{index}, .up@{index} {
+    height: @cellSize * @index;
+  }
+  .grid(@index - 1);
+}
+.grid (0) {}
+
+.grid (@iterations);
+
+.t { bottom: 100%; margin-bottom: -@cellSize; }
+.b { top: 100%; margin-top: -@cellSize; }
+.r { left: 100%; margin-right: -@cellSize; }
+.l { right: 100%; margin-left: -@cellSize; }
+
+.positioner (@index) when (@index >= 0) {
+  .b@{index} { bottom: @index*@cellSize !important; }
+  .t@{index} { top: @index*@cellSize !important; }
+  .l@{index} { left: @index*@cellSize !important; }
+  .r@{index} { right: @index*@cellSize !important; }
+  .positioner (@index - 1);
+}
+.positioner (@index) when (@index <0) {}
+.positioner(10);
+
+[class^=left] { right: 0; }
+[class^=right] { left: 0; }
+[class^=up] { bottom:0; }
+[class^=down] { top: 0; }
+
+.center { left: @levelWidth/2 - @cellSize/2; }
+.middle { left: @levelHeight/2 - @cellSize/2; }

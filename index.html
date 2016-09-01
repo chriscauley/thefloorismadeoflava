@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <title>The #floor is made of .lava</title>
     <link rel="shortcut icon" href="/favicon.png" />
     <link rel="stylesheet/less" type="text/css" href="less/base.less" />
     <script type="text/javascript">less = { env: 'development' };</script>
@@ -13,7 +14,7 @@
       <label for="trigger-level2">Level 2</label>
     </section>
     <div id="level1">
-      <span class="lava"></span>
+      <span lava="You're Dead!"></span>
       <div class="down5 center">
         <div class="left6 b">
           <div class="down3 l">
@@ -44,13 +45,13 @@
     </div>
     <input type="checkbox" id="trigger-level2" />
     <div id="level2">
-      <span class="lava"></span>
+      <span lava="Lava make you dead!"></span>
       <div class="center up3 b0">
         <label for="trigger-level2" class="b1 stairs"></label>
-        <div class="left5 t spin"></div>
+        <div class="left5 t" spin="0"></div>
         <div class="up5 l r4 b6">
-          <div class="right5 t spin delay2000"></div>
-          <div class="left5 t"></div>
+          <div class="right5 t delay2000" spin="90"></div>
+          <div class="left5 up5 t"></div>
 
         </div>
       </div>

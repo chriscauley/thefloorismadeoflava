@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  background: white;
+  display: none;
+  height: @cellSize;
+  outline: 1px solid;
+  position: absolute;
+  width: @cellSize;
+  &:hover > &, [id^=level] > &, &#level1 { display: block; }
+}
+
+a,label { cursor: pointer; }
+
+[type="checkbox"] {
+  display:none;
+  &:checked + div { display: block !important; }
+}
+
+[id^=level] {
+  background: white;
+  display: none;
+  height: @levelHeight;
+  position: absolute;
+  top:10%;
+  left: 5%;
+  width: @levelWidth;
+  label { position: absolute; }
+}
+

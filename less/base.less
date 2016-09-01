@@ -1,125 +1,41 @@
-@cellSize: 25px;
-@iterations: 30;
-@levelWidth: @cellSize*30;
-@levelHeight: @cellSize*20;
+@import "var.less"; // a few variables
+@import "global.less"; // redefine pure element behavior & elements with ids
+@import "grid.less";
+@import "lava";
 
-.grid (@index) when (@index > 0) {
-  .left@{index}, .right@{index} {
-    width: @cellSize * @index;
+.spinner(@offset) {
+  @keyframes ~"spin@{offset}" {
+    0% { transform: rotate(0deg+@offset); }
+    44% { transform: rotate(0deg+@offset); }
+    50% { transform: rotate(270deg+@offset); }
+    98% { transform: rotate(270deg+@offset); }
+    100% { transform: rotate(360deg+@offset); }
   }
-  .down@{index}, .up@{index} {
-    height: @cellSize * @index;
+  [spin="@{offset}"] {
+    animation-name: ~"spin@{offset}";
   }
-  .grid(@index - 1);
-}
-.grid (0) {}
-
-.grid (@iterations);
-.lava {
-  background: red;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
+.spinner(0);
+.spinner(90);
+.spinner(180);
+.spinner(270);
 
-div {
-  background: white;
-  height: @cellSize;
-  position: absolute;
-  width: @cellSize;
-}
-
-a,label { cursor: pointer; }
-
-#level1 { display: block; }
-[id^=level] {
-  background: white;
-  display: none;
-  height: @levelHeight;
-  position: absolute;
-  top:10%;
-  left: 5%;
-  width: @levelWidth;
-  label { position: absolute; }
-}
-
-.t { bottom: 100%; margin-bottom: -@cellSize; }
-.b { top: 100%; margin-top: -@cellSize; }
-.r { left: 100%; margin-right: -@cellSize; }
-.l { right: 100%; margin-left: -@cellSize; }
-
-.positioner (@index) when (@index >= 0) {
-  .b@{index} { bottom: @index*@cellSize !important; }
-  .t@{index} { top: @index*@cellSize !important; }
-  .l@{index} { left: @index*@cellSize !important; }
-  .r@{index} { right: @index*@cellSize !important; }
-  .positioner (@index - 1);
-}
-.positioner (@index) when (@index <0) {}
-.positioner(10);
-
-@keyframes spinl {
-  0% { transform: rotate(0deg); }
-  44% { transform: rotate(0deg); }
-  50% { transform: rotate(270deg); }
-  98% { transform: rotate(270deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.spin {
+[spin] {
   transform-origin: @cellSize/2 @cellSize/2;
-  animation: spinl 5s linear infinite;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 .delayer(@ms) when (@ms >=0) {
   .delay@{ms} {
-    animation-delay: "@{ms}ms";
+    animation-delay: ~"@{ms}ms";
   }
   .delayer(@ms - 100);
 }
 .delayer (@ms) when (@ms <0) {}
 .delayer(5000);
-
-[class^=left] { right: 0; }
-[class^=right] { left: 0; }
-[class^=up] { bottom:0; }
-[class^=down] { top: 0; }
-
-div {
-  display: none;
-  outline: 1px solid;
-}
-
-div:hover >div, [id^=level] > div {
-  display: block;
-}
-
-[type="checkbox"] {
-  display:none;
-  &:checked + div { display: block !important; }
-}
-
-.lava:hover:before {
-  background: pink;
-  content: "You're Dead!!";
-  font-size: 100px;
-  height: 100%;
-  line-height: @levelHeight;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  z-index: 999;
-}
-
-.center { left: @levelWidth/2 - @cellSize/2; }
-.middle { left: @levelHeight/2 - @cellSize/2; }
 
 [for=trigger-debug] {
   opacity: 0;
@@ -136,7 +52,7 @@ div:hover >div, [id^=level] > div {
 }
 
 #trigger-debug:checked ~ * {
-  .lava:hover:before { font-size: 1em; width: 25%; height: 10%; line-height: 1; }
+  [lava]:hover:before { font-size: 1em; width: 25%; height: 10%; line-height: 1; }
   div>div { display: block; background: green; }
   div:hover >div, [id^=level] > div { background: inherit; }
 }
