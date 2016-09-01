@@ -4,10 +4,10 @@
 @levelHeight: @cellSize*20;
 
 .grid (@index) when (@index > 0) {
-  (~".left@{index}"), (~".right@{index}") {
+  .left@{index}, .right@{index} {
     width: @cellSize * @index;
   }
-  (~".down@{index}"), (~".up@{index}") {
+  .down@{index}, .up@{index} {
     height: @cellSize * @index;
   }
   .grid(@index - 1);
@@ -56,10 +56,10 @@ a,label { cursor: pointer; }
 .l { right: 100%; margin-left: -@cellSize; }
 
 .positioner (@index) when (@index >= 0) {
-  (~".b@{index}") { bottom: @index*@cellSize !important; }
-  (~".t@{index}") { top: @index*@cellSize !important; }
-  (~".l@{index}") { left: @index*@cellSize !important; }
-  (~".r@{index}") { right: @index*@cellSize !important; }
+  .b@{index} { bottom: @index*@cellSize !important; }
+  .t@{index} { top: @index*@cellSize !important; }
+  .l@{index} { left: @index*@cellSize !important; }
+  .r@{index} { right: @index*@cellSize !important; }
   .positioner (@index - 1);
 }
 .positioner (@index) when (@index <0) {}
@@ -79,7 +79,9 @@ a,label { cursor: pointer; }
 }
 
 .delayer(@ms) when (@ms >=0) {
-  (~".delay@{ms}") { animation-delay: (~"@{ms}ms"); }
+  .delay@{ms} {
+    animation-delay: "@{ms}ms";
+  }
   .delayer(@ms - 100);
 }
 .delayer (@ms) when (@ms <0) {}
