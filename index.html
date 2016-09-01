@@ -2,35 +2,29 @@
 <html>
   <head>
     <link rel="stylesheet/less" type="text/css" href="less/base.less" />
+    <script type="text/javascript">less = { env: 'development' };</script>
     <script src="js/less.js" type="text/javascript"></script>
   </head>
-  <body>
-    <div id="floor" class="lava"></div>
-    <div id="start" class="w1 h5 white">
-      <div class="w4 h1 bottom right">
-        <div class="w1 h5 bottom right">
-          <div class="w10 h1 bottom left">
-            <div class="w1 h5 top left">
-              <div class="w15 h1 top left">
-                <div class="w1 h15 bottom left">
-                  <div class="w11 h1 bottom right">
-                    <div class="w1 h10 top right">
-                      <div class="w7 h1 top left">
-                        <div class="w1 h3 bottom left">
-                          <div class="w5 h1 bottom right">
-                            <div class="w1 h3 bottom right">
-                              <div class="w5 h1 bottom left">
-                                <div class="w1 h3 bottom left">
-                                  <div class="w1 h1 bottom left">
-                                    <div class="w1 h9 top left">
-                                      <div class="w12 h1 top right">
-                                        <div class="w1 h1 bottom right">
-                                          <label for="trigger-level2">a</label>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+  <section id="select-level">
+    <label for="trigger-level2">Level 2</label>
+  </section>
+  <body class="debug">
+    <div id="level1">
+      <span class="lava"></span>
+      <div class="down5 center">
+        <div class="left6 b">
+          <div class="down3 l">
+            <div class="right12 b">
+              <div class="down3 r">
+                <div class="left10 b">
+                  <div class="down3 l">
+                    <div class="right8 b">
+                      <div class="down3 r">
+                        <div class="left6 b">
+                          <div class="down3 l">
+                            <div class="right2 b">
+                              <div class="down5 r">
+                                <label for="trigger-level2" class="b0 stairs"></label>
                               </div>
                             </div>
                           </div>
@@ -47,7 +41,13 @@
     </div>
     <input type="checkbox" id="trigger-level2" />
     <div id="level2">
-      <div class="top left w1 h10">
+      <span class="lava"></span>
+      <div class="center up3 b0">
+        <label for="trigger-level2" class="b1 stairs"></label>
+        <div class="left5 t spin"></div>
+        <div class="up5 l r4 b6">
+          
+        </div>
       </div>
     </div>
   </body>

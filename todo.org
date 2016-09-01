@@ -1,4 +1,14 @@
-* pipe dreams
+* easter eggs
 ** click to enable music
  - show "There is no music, this is pure css!"
  - add floating music note background
+** loading screens
+ - Use keyframe animations to show a loading screen in between levels
+** jokes
+ - Text at the bottom right of screen that show jokes for each cell
+** menus
+ - Help menu that shows description
+* components
+** stairs
+ - labels that go to the next floor
+ - next floor should have a path to the bumper (outside inch of screen)

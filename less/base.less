@@ -1,11 +1,13 @@
 @cellSize: 25px;
 @iterations: 30;
+@levelWidth: @cellSize*30;
+@levelHeight: @cellSize*20;
 
 .grid (@index) when (@index > 0) {
-  (~".w@{index}") {
+  (~".left@{index}"), (~".right@{index}") {
     width: @cellSize * @index;
   }
-  (~".h@{index}") {
+  (~".down@{index}"), (~".up@{index}") {
     height: @cellSize * @index;
   }
   .grid(@index - 1);
@@ -13,13 +15,13 @@
 .grid (0) {}
 
 .grid (@iterations);
-#floor {
+.lava {
   background: red;
+  height: 100%;
+  left: 0;
   position: absolute;
-  height: 90%;
-  top: 10%;
+  top: 0;
   width: 100%;
-  &:hover { background: blue; }
 }
 
 body {
@@ -27,49 +29,97 @@ body {
   padding: 0;
 }
 
-#start, :hover, :hover>div {
+div {
   background: white;
+  height: @cellSize;
+  position: absolute;
+  width: @cellSize;
 }
 
-:hover>div {
+label { cursor: pointe; }
+
+#level1 { display: block; }
+[id^=level] {
   background: white;
-}
-
-div { background: green; }
-
-#start {
+  display: none;
+  height: @levelHeight;
   position: absolute;
   top:10%;
-  left: 50%;
+  left: 5%;
+  width: @levelWidth;
+  label { position: absolute; }
 }
 
-.top { bottom: 100%; margin-bottom: -@cellSize; }
-.bottom{ top: 100%; margin-top: -@cellSize; }
-.right { left: 100%; margin-right: -@cellSize; }
-.left { right: 100%; margin-left: -@cellSize; }
+.t { bottom: 100%; margin-bottom: -@cellSize; }
+.b { top: 100%; margin-top: -@cellSize; }
+.r { left: 100%; margin-right: -@cellSize; }
+.l { right: 100%; margin-left: -@cellSize; }
+
+.positioner (@index) when (@index >= 0) {
+  (~".b@{index}") { bottom: @index*@cellSize !important; }
+  (~".t@{index}") { top: @index*@cellSize !important; }
+  (~".l@{index}") { left: @index*@cellSize !important; }
+  (~".r@{index}") { right: @index*@cellSize !important; }
+  .positioner (@index - 1);
+}
+.positioner (@index) when (@index <0) {}
+.positioner(10);
+
+@-webkit-keyframes spinl {
+  0% { -webkit-transform: rotate(0deg); }
+  44% { -webkit-transform: rotate(0deg); }
+  50% { -webkit-transform: rotate(270deg); }
+  98% { -webkit-transform: rotate(270deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+.spin {
+  -webkit-transform-origin: @cellSize/2 @cellSize/2;
+  -webkit-animation: spinl 5s linear infinite;
+}
+
+[class^=left] { right: 0; }
+[class^=right] { left: 0; }
+[class^=up] { bottom:0; }
+[class^=down] { top: 0; }
 
 div {
-  background: green;
-  position: absolute;
+  display: none;
   outline: 1px solid;
+}
+
+div:hover >div, [id^=level] > div {
+  display: block;
 }
 
 [type="checkbox"] {
   display:none;
-  &:checked + #level2 { display: block; }
-}
-
-#level2 {
-  display: none;
-  top: 10%;
-  left: 30px;
+  &:checked + div { display: block !important; }
 }
 
 .lava:hover:before {
   background: pink;
-  content:"";
-  position: absolute;
-  width: 100%;
+  content: "Your'e Dead!!";
+  font-size: 100px;
   height: 100%;
+  line-height: @levelHeight;
+  position: absolute;
+  text-align: center;
+  width: 100%;
   z-index: 999;
+}
+
+.center { left: @levelWidth/2 - @cellSize/2; }
+.middle { left: @levelHeight/2 - @cellSize/2; }
+
+.debug {
+  .lava:hover:before { width: 10%; height: 10%; }
+  div>div { display: block; background: green; }
+  div:hover >div, [id^=level] > div { background: inherit; }
+}
+
+.stairs {
+  background: black;
+  width: @cellSize;
+  height: @cellSize;
 }
