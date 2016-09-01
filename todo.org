@@ -12,3 +12,5 @@
 ** stairs
  - labels that go to the next floor
  - next floor should have a path to the bumper (outside inch of screen)
+** css to use
+ - :target to make selectable elements

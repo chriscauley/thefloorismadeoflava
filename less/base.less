@@ -36,7 +36,7 @@ div {
   width: @cellSize;
 }
 
-label { cursor: pointe; }
+a,label { cursor: pointer; }
 
 #level1 { display: block; }
 [id^=level] {
@@ -65,18 +65,25 @@ label { cursor: pointe; }
 .positioner (@index) when (@index <0) {}
 .positioner(10);
 
-@-webkit-keyframes spinl {
-  0% { -webkit-transform: rotate(0deg); }
-  44% { -webkit-transform: rotate(0deg); }
-  50% { -webkit-transform: rotate(270deg); }
-  98% { -webkit-transform: rotate(270deg); }
-  100% { -webkit-transform: rotate(360deg); }
+@keyframes spinl {
+  0% { transform: rotate(0deg); }
+  44% { transform: rotate(0deg); }
+  50% { transform: rotate(270deg); }
+  98% { transform: rotate(270deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .spin {
-  -webkit-transform-origin: @cellSize/2 @cellSize/2;
-  -webkit-animation: spinl 5s linear infinite;
+  transform-origin: @cellSize/2 @cellSize/2;
+  animation: spinl 5s linear infinite;
 }
+
+.delayer(@ms) when (@ms >=0) {
+  (~".delay@{ms}") { animation-delay: (~"@{ms}ms"); }
+  .delayer(@ms - 100);
+}
+.delayer (@ms) when (@ms <0) {}
+.delayer(5000);
 
 [class^=left] { right: 0; }
 [class^=right] { left: 0; }
@@ -99,7 +106,7 @@ div:hover >div, [id^=level] > div {
 
 .lava:hover:before {
   background: pink;
-  content: "Your'e Dead!!";
+  content: "You're Dead!!";
   font-size: 100px;
   height: 100%;
   line-height: @levelHeight;
@@ -113,7 +120,7 @@ div:hover >div, [id^=level] > div {
 .middle { left: @levelHeight/2 - @cellSize/2; }
 
 .debug {
-  .lava:hover:before { width: 10%; height: 10%; }
+  .lava:hover:before { font-size: 1em; width: 25%; height: 10%; line-height: 1; }
   div>div { display: block; background: green; }
   div:hover >div, [id^=level] > div { background: inherit; }
 }
