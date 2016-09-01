@@ -119,7 +119,21 @@ div:hover >div, [id^=level] > div {
 .center { left: @levelWidth/2 - @cellSize/2; }
 .middle { left: @levelHeight/2 - @cellSize/2; }
 
-.debug {
+[for=trigger-debug] {
+  opacity: 0;
+  display: block;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  #trigger-debug:checked { opacity: 1; }
+}
+
+#select-level {
+ display: none; position: absolute;
+ #trigger-debug:checked ~ & { display: block; }
+}
+
+#trigger-debug:checked ~ * {
   .lava:hover:before { font-size: 1em; width: 25%; height: 10%; line-height: 1; }
   div>div { display: block; background: green; }
   div:hover >div, [id^=level] > div { background: inherit; }
