@@ -6,7 +6,7 @@
 .spinner(@offset) {
   @keyframes ~"spin@{offset}" {
     0% { transform: rotate(0deg+@offset); }
-    44% { transform: rotate(0deg+@offset); }
+    49% { transform: rotate(0deg+@offset); }
     50% { transform: rotate(270deg+@offset); }
     98% { transform: rotate(270deg+@offset); }
     100% { transform: rotate(360deg+@offset); }
@@ -28,6 +28,8 @@
   animation-timing-function: linear;
 }
 
+.reverse { animation-direction: reverse; }
+
 .delayer(@ms) when (@ms >=0) {
   .delay@{ms} {
     animation-delay: ~"@{ms}ms";
@@ -35,7 +37,7 @@
   .delayer(@ms - 100);
 }
 .delayer (@ms) when (@ms <0) {}
-.delayer(5000);
+.delayer(8000);
 
 [for=trigger-debug] {
   opacity: 0;
